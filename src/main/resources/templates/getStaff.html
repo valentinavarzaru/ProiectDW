@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID Staff</th>
+        <th>ID Job</th>
+        <th>Nume Staff</th>
+        <th>Salariu de baza</th>
+    </tr>
+    <tr th:each="staff: ${staffMembers}">
+        <td th:text="${staff.staff_id}"></td>
+        <td th:text="${staff.job_id}"></td>
+        <td th:text="${staff.staff_name}"></td>
+        <td th:text="${staff.base_salary}"></td>
+    </tr>
+</table>
+
+<a th:href="@{/main}">Inapoi</a>
+</body>
+</html>

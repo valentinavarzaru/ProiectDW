@@ -29,6 +29,6 @@ public class ProiectDwApplication implements CommandLineRunner {
         String sql2 = "select * from user_OLTP_dw.promotions";
         List<PROMOTIONS> promo = jdbcTemplate.query(sql2, BeanPropertyRowMapper.newInstance(PROMOTIONS.class));
 
-        promo.forEach(System.out :: println);
+//        promo.forEach(System.out :: println);
     }
 }
