@@ -73,8 +73,8 @@ public class Querys {
             "and ap.APPOINTMENT_ID = ?)\n" +
             "* (select sum(service_price) from user_OLTP_dw.appointment_services where appointment_id = ?)/100, 2)\n" +
             "where APPOINTMENT_ID = ?";
-    public final static String STERGE_serv = "delete from user_OLTP_dw.appointment_services where appointment_id = ? and salon_service_id = ? and staff_id  = ?)";
-    public final static String STERGE_serv_DW = "delete from user_depozit_dw.services_value_dw where appointment_id = ? and salon_service_id = ? and staff_id  = ?)";
+    public final static String STERGE_serv = "delete from user_OLTP_dw.appointment_services where appointment_id = ? and salon_service_id = ? and staff_id  = ?";
+    public final static String STERGE_serv_DW = "delete from user_depozit_dw.services_value_dw where appointment_id = ? and salon_service_id = ? and staff_id  = ?";
 
 
 

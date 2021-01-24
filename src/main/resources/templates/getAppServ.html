@@ -260,8 +260,8 @@
                 <td th:text="${appServ.getStaff_id()}"></td>
                 <td th:text="${appServ.getService_price()}"></td>
                 <td>
-                    <a th:href="@{/stergeAppServ/{idApp}(idApp=${appServ.getAppointment_id()})/{idServ}(idServ=${appServ.getSalon_service_id()})/{idStaff}(idStaff=${appServ.getStaff_id()})}" class="btn btn-outline-primary">Sterge
-                        Serviciu Programare</a>
+                    <a th:href="@{/stergeAppServ/{idApp}/{idServ}/{idStaff}(idApp=${appServ.getAppointment_id()}, idServ=${appServ.getSalon_service_id()}, idStaff=${appServ.getStaff_id()})}" class="btn btn-outline-primary">Sterge Serviciu Programare</a>
+<!--                    <a th:href="@{/stergeAppServ/{idApp}(idApp=${appServ.getAppointment_id()}){idServ}(idServ=${appServ.getSalon_service_id()}){idStaff}(idStaff=${appServ.getStaff_id()})}" class="btn btn-outline-primary">Sterge Serviciu Programare</a>-->
                 </td>
             </tr>
         </table>
