@@ -5,9 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import proiect_dw.proiect_dw.model.APPOINTMENTS;
-import proiect_dw.proiect_dw.model.APPOINTMENT_SERVICES;
-import proiect_dw.proiect_dw.model.STAFF;
+import proiect_dw.proiect_dw.model.*;
 import proiect_dw.proiect_dw.service.MainService;
 import org.springframework.ui.Model;
 
@@ -23,6 +21,7 @@ public class MainController {
         return "index";
     }
 
+//    Staff
     @GetMapping("/main/getStaff")
     public String getStaff(Model model) {
         model.addAttribute("staffMembers", mainService.getStaff());
@@ -49,6 +48,66 @@ public class MainController {
         model.addAttribute("staffMembers", mainService.getStaff());
         return "getStaff";
     }
+
+//    Clients
+    @GetMapping("/main/getClients")
+    public String getClients(Model model) {
+        model.addAttribute("Clients", mainService.getClients());
+        return "getClients";
+    }
+
+    @PostMapping("/adaugaClient")
+    public String adaugaClient(@RequestBody CLIENTS s, Model model) {
+        mainService.adaugaClient(s);
+        model.addAttribute("Clients", mainService.getClients());
+        return "getClients";
+    }
+
+    @PostMapping("/updateClient")
+    public String updateClient(@RequestBody CLIENTS s, @RequestParam int id, Model model) {
+        mainService.updateClient(s,id);
+        model.addAttribute("Clients", mainService.getClients());
+        return "getClients";
+    }
+
+    @GetMapping("/stergeClient/{idClient}")
+    public String stergeClient(@PathVariable int idClient, Model model) {
+        mainService.stergeClient(idClient);
+        model.addAttribute("Clients", mainService.getClients());
+        return "getClients";
+    }
+
+
+
+//    Salon Services
+    @GetMapping("/main/getSalServ")
+    public String getSalServ(Model model) {
+        model.addAttribute("SalonServices", mainService.getSalServices());
+        return "getSalServ";
+    }
+
+    @PostMapping("/adaugaSalServ")
+    public String adaugaSalServ(@RequestBody SALON_SERVICES s, @RequestParam int idJob, @RequestParam double extra, Model model) {
+        mainService.adaugaSalServ(s, idJob, extra);
+        model.addAttribute("SalonServices", mainService.getSalServices());
+        return "getSalServ";
+    }
+
+    @PostMapping("/updateSalServ")
+    public String updateSalServ(@RequestBody SALON_SERVICES s, @RequestParam int id, Model model) {
+        mainService.updateSalServ(s,id);
+        model.addAttribute("SalonServices", mainService.getSalServices());
+        return "getSalServ";
+    }
+
+    @GetMapping("/stergeSalServ/{idSalServ}")
+    public String stergeSalServ(@PathVariable int idSalServ, Model model) {
+        mainService.stergeSalServ(idSalServ);
+        model.addAttribute("SalonServices", mainService.getSalServices());
+        return "getSalServ";
+    }
+
+
 
 //    Appointments
 
@@ -99,6 +158,106 @@ public class MainController {
         mainService.stergeServ(idApp, idServ, idStaff);
         model.addAttribute("AppServices", mainService.getServ());
         return "getAppServ";
+    }
+
+    //   Others
+
+    @GetMapping("/main/getCategories")
+    public String getCategories(Model model) {
+        model.addAttribute("Categories", mainService.getCategories());
+        return "getCategories";
+    }
+
+    @GetMapping("/main/getSubcategories")
+    public String getSubcategories(Model model) {
+        model.addAttribute("Subcategories", mainService.getSubcategories());
+        return "getSubcategories";
+    }
+
+    @GetMapping("/main/getPromo")
+    public String getPromo(Model model) {
+        model.addAttribute("Promo", mainService.getPromo());
+        return "getPromo";
+    }
+
+    @GetMapping("/main/getExtraCharge")
+    public String getExtraCharge(Model model) {
+        model.addAttribute("ExtraCharge", mainService.getExtraCharge());
+        return "getExtraCharge";
+    }
+
+    @GetMapping("/main/getJobs")
+    public String getJobs(Model model) {
+        model.addAttribute("Jobs", mainService.getJobs());
+        return "getJobs";
+    }
+
+    @GetMapping("/main/getAgeCat")
+    public String getAgeCat(Model model) {
+        model.addAttribute("AgeCat", mainService.getAgeCat());
+        return "getAgeCat";
+    }
+
+    @GetMapping("/main/getPayMet")
+    public String getPayMet(Model model) {
+        model.addAttribute("PayMet", mainService.getPayMet());
+        return "getPayMet";
+    }
+
+    @GetMapping("/main/getPayment")
+    public String getPayment(Model model) {
+        model.addAttribute("Payments", mainService.getPayment());
+        return "getPayment";
+    }
+
+//    Depozit
+
+    @GetMapping("/main/getClientsDw")
+    public String getClientsDw(Model model) {
+        model.addAttribute("ClientsDw", mainService.getClientsDw());
+        return "getClientsDw";
+    }
+
+    @GetMapping("/main/getPaymentsDw")
+    public String getPaymentsDw(Model model) {
+        model.addAttribute("PaymentsDw", mainService.getPaymentsDw());
+        return "getPaymentsDw";
+    }
+
+    @GetMapping("/main/getPromoDw")
+    public String getPromoDw(Model model) {
+        model.addAttribute("PromoDw", mainService.getPromoDw());
+        return "getPromoDw";
+    }
+
+    @GetMapping("/main/getSalServDw")
+    public String getSalServDw(Model model) {
+        model.addAttribute("SalServDw", mainService.getSalServDw());
+        return "getSalServDw";
+    }
+
+    @GetMapping("/main/getServValueDw")
+    public String getServValueDw(Model model) {
+        model.addAttribute("ServValueDw", mainService.getServValueDw());
+        return "getServValueDw";
+    }
+
+    @GetMapping("/main/getStaffDw")
+    public String getStaffDw(Model model) {
+        model.addAttribute("StaffDw", mainService.getStaffDw());
+        return "getStaffDw";
+    }
+
+    @GetMapping("/main/getJobsDw")
+    public String getJobsDw(Model model) {
+        model.addAttribute("JobsDw", mainService.getJobsDw());
+        return "getJobsDw";
+    }
+
+    @GetMapping("/main/getTimpDw")
+    public String getTimpDw(Model model) {
+        model.addAttribute("TimpDw", mainService.getTimpDw());
+        return "getTimpDw";
     }
 
 }

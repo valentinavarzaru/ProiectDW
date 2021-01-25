@@ -14,6 +14,46 @@ public class Querys {
     public final static String STERGE_ANGAJAT = "delete from user_OLTP_dw.staff where staff_id = ?";
     public final static String STERGE_ANGAJAT_DW = "delete from user_depozit_dw.staff_dw where staff_id = ?";
 
+    //Clients
+    public final static String GET_CLIENTS_SQL = "select * from user_OLTP_dw.clients order by client_id desc";
+    public final static String ADAUGA_CLIENT = "insert into user_OLTP_dw.clients values ((select max(client_id) from user_OLTP_dw.clients ) + 1, ?, ?, ?, ?, ?, ?, ?)";
+    public final static String ADAUGA_CLIENT_DW = "insert into user_depozit_dw.clients_dw\n" +
+            "values ((select max(client_id) from user_depozit_dw.clients_dw) + 1, ?, (select age_category_name\n" +
+            "from user_OLTP_dw.age_category a\n" +
+            "where a.age_category_id = ?) , ?, ?, ?, ?, ?, ?)";
+    public final static String UPDATE_CLIENT = "update user_OLTP_dw.clients set age_category_id= ?, client_first_name = ?, client_last_name = ?, \n" +
+            "client_gender = ?, client_address = ?, client_cell_phone = ?, client_email = ?\n" +
+            "where client_id = ?";
+    public final static String UPDATE_CLIENT_DW = "update user_depozit_dw.clients_dw set client_age_category_id= ?, age_category_name = (select age_category_name\n" +
+            "from user_OLTP_dw.age_category a where a.age_category_id = ?), client_first_name = ?, client_last_name = ?, \n" +
+            "client_gender = ?, client_address = ?, client_cell_phone = ?, client_email = ? where client_id = ?";
+    public final static String STERGE_CLIENT = "delete from user_OLTP_dw.clients where client_id = ?";
+    public final static String STERGE_CLIENT_DW = "delete from user_depozit_dw.clients_dw where client_id = ?";
+
+    //Salon Services
+    public final static String GET_SALON_SERVICES_SQL = "select * from user_OLTP_dw.salon_services order by salon_service_id desc";
+    public final static String ADAUGA_SALSERV = "insert into user_OLTP_dw.salon_services values ((select max(salon_service_id) from user_OLTP_dw.salon_services) + 1, ?, ?, ?, ?, ?)";
+    public final static String ADAUGA_CHARGE_AMOUNT = "insert into user_OLTP_dw.staff_extra_charge values (?, (select max(salon_service_id) from user_OLTP_dw.staff_extra_charge) + 1, ?)";
+    public final static String ADAUGA_SALSERV_DW = "insert into user_depozit_dw.salon_services_dw values ((select max(salon_service_id) from user_depozit_dw.salon_services_dw) + 1, ?, ?, \n" +
+            "(select subcategory_name from user_OLTP_dw.salon_service_subcategory where salon_service_subcategory_id = ?),\n" +
+            "(select salon_service_category_id from user_OLTP_dw.salon_service_subcategory where salon_service_subcategory_id = ?),\n" +
+            "(select category_name from user_OLTP_dw.salon_service_subcategory s, user_OLTP_dw.salon_service_category c\n" +
+            "where s.salon_service_category_id = c.salon_service_category_id\n" +
+            "and s.salon_service_subcategory_id = ?)\n" +
+            ")";
+    public final static String UPDATE_SALSERV = "update user_OLTP_dw.salon_services set SALON_SERVICE_NAME = ?, SALON_SERVICE_DESCRIPTION = ?, SALON_STANDARD_PRICE = ?,\n" +
+            "SALON_SERVICE_SUBCATEGORY_ID = ?, PROMOTION_ID = ? where SALON_SERVICE_ID = ?";
+    public final static String UPDATE_SALSERV_DW = "update user_depozit_dw.salon_services_dw set SALON_SERVICE_NAME = ?, SALON_SERVICE_SUBCATEGORY_ID = ?, \n" +
+            "subcategory_name = (select subcategory_name from user_OLTP_dw.salon_service_subcategory where salon_service_subcategory_id = ?),\n" +
+            "salon_service_category_id = (select salon_service_category_id from user_OLTP_dw.salon_service_subcategory where salon_service_subcategory_id = ?),\n" +
+            "category_name = (select category_name from user_OLTP_dw.salon_service_subcategory s, user_OLTP_dw.salon_service_category c\n" +
+            "where s.salon_service_category_id = c.salon_service_category_id\n" +
+            "and s.salon_service_subcategory_id = ?)\n" +
+            "where SALON_SERVICE_ID = ?";
+    public final static String STERGE_SALSERV = "delete from user_OLTP_dw.salon_services where SALON_SERVICE_ID = ?";
+    public final static String STERGE_SALSERV_DW = "delete from user_depozit_dw.salon_services_dw where SALON_SERVICE_ID = ?";
+    public final static String STERGE_CHARGE_AMOUNT = "delete from user_OLTP_dw.staff_extra_charge where SALON_SERVICE_ID = ?";
+
     //Appointments
     public final static String GET_progr_SQL = "select * from (select * from user_OLTP_dw.appointments order by appointment_id desc) where rownum<1001";
     public final static String ADAUGA_progr = "insert into user_OLTP_dw.appointments(appointment_id, client_id, appointment_date, appointment_time) values ((select max(appointment_id) from user_OLTP_dw.appointments ) + 1, ?, ?, ?)";
@@ -76,6 +116,25 @@ public class Querys {
     public final static String STERGE_serv = "delete from user_OLTP_dw.appointment_services where appointment_id = ? and salon_service_id = ? and staff_id  = ?";
     public final static String STERGE_serv_DW = "delete from user_depozit_dw.services_value_dw where appointment_id = ? and salon_service_id = ? and staff_id  = ?";
 
+    //    Others
+    public final static String GET_CAT_SQL = "select * from user_OLTP_dw.salon_service_category";
+    public final static String GET_SUBCAT_SQL = "select * from user_OLTP_dw.salon_service_subcategory";
+    public final static String GET_PROMOTIONS_SQL = "select * from user_OLTP_dw.promotions";
+    public final static String GET_EXTRA_CHARGE_SQL = "select * from user_OLTP_dw.staff_extra_charge order by salon_service_id desc";
+    public final static String GET_JOBS_SQL = "select * from user_OLTP_dw.staff_job_title";
+    public final static String GET_AGE_CAT_SQL = "select * from user_OLTP_dw.age_category";
+    public final static String GET_PAYMET_SQL = "select * from user_OLTP_dw.payment_methods";
+    public final static String GET_PAYMENT_SQL = "select * from (select * from user_OLTP_dw.payments order by payment_id desc) where rownum<1001";
+
+    //    Depozit
+    public final static String GET_CLIENTS_DW_SQL = "select * from user_depozit_dw.CLIENTS_DW order by client_id desc";
+    public final static String GET_PAYMENTS_DW_SQL = "select * from (select * from user_depozit_dw.PAYMENTS_DW order by payment_id desc) where rownum<1001";
+    public final static String GET_PROMOTIONS_DW_SQL = "select * from user_depozit_dw.PROMOTIONS_DW";
+    public final static String GET_SALON_SERVICES_DW_SQL = "select * from user_depozit_dw.SALON_SERVICES_DW order by salon_service_id desc";
+    public final static String GET_SERVICES_VALUE_DW_SQL = "select * from (select * from user_depozit_dw.SERVICES_VALUE_DW order by SERVICE_VALUE_ID desc) where rownum<1001";
+    public final static String GET_STAFF_DW_SQL = "select * from user_depozit_dw.STAFF_DW order by staff_id desc";
+    public final static String GET_STAFF_JOB_TITLE_DW_SQL = "select * from user_depozit_dw.STAFF_JOB_TITLE_DW";
+    public final static String GET_TIMP_DW_SQL = "select * from user_depozit_dw.TIMP_DW";
 
 
 }

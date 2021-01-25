@@ -3,13 +3,9 @@ package proiect_dw.proiect_dw.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
-import proiect_dw.proiect_dw.model.APPOINTMENTS;
-import proiect_dw.proiect_dw.model.APPOINTMENT_SERVICES;
-import proiect_dw.proiect_dw.model.STAFF;
+import proiect_dw.proiect_dw.model.*;
 import proiect_dw.proiect_dw.query.Querys;
-import proiect_dw.proiect_dw.repository.AppServicesRepository;
-import proiect_dw.proiect_dw.repository.AppointmentsRepository;
-import proiect_dw.proiect_dw.repository.StaffRepository;
+import proiect_dw.proiect_dw.repository.*;
 
 import java.util.List;
 
@@ -34,6 +30,26 @@ public class MainService {
 
     public List<STAFF> stergeAngajat(int id) {
         return staffRepository.stergeAngajat(id);
+    }
+
+//    Clients
+    @Autowired
+    private ClientsRepository clientsRepository;
+
+    public List<CLIENTS> getClients() {
+        return clientsRepository.getClients();
+    }
+
+    public List<CLIENTS> adaugaClient(CLIENTS s) {
+        return clientsRepository.adaugaClient(s);
+    }
+
+    public List<CLIENTS> updateClient(CLIENTS s, int id) {
+        return clientsRepository.updateClient(s, id);
+    }
+
+    public List<CLIENTS> stergeClient(int id) {
+        return clientsRepository.stergeClient(id);
     }
 
 //    Appointments
@@ -71,5 +87,97 @@ public List<APPOINTMENTS> getProgr() {
         return appServicesRepository.stergeServ(idApp, idServ, idStaff);
     }
 
+//    Salon Services
 
+    @Autowired
+    private SalServicesRepository salServicesRepository;
+
+    public List<SALON_SERVICES> getSalServices() {
+        return salServicesRepository.getSalServices();
+    }
+
+    public List<SALON_SERVICES> adaugaSalServ(SALON_SERVICES s, int idJob, double extra) {
+        return salServicesRepository.adaugaSalServ(s, idJob, extra);
+    }
+
+    public List<SALON_SERVICES> updateSalServ(SALON_SERVICES s, int id) {
+        return salServicesRepository.updateSalServ(s, id);
+    }
+
+    public List<SALON_SERVICES> stergeSalServ(int id) {
+        return salServicesRepository.stergeSalServ(id);
+    }
+
+//    Others
+
+    @Autowired
+    private OthersRepository othersRepository;
+
+    public List<SALON_SERVICE_CATEGORY> getCategories() {
+        return othersRepository.getCategories();
+    }
+
+    public List<SALON_SERVICE_SUBCATEGORY> getSubcategories() {
+        return othersRepository.getSubcategories();
+    }
+
+    public List<PROMOTIONS> getPromo() {
+        return othersRepository.getPromo();
+    }
+
+    public List<STAFF_EXTRA_CHARGE> getExtraCharge() {
+        return othersRepository.getExtraCharge();
+    }
+
+    public List<STAFF_JOB_TITLE> getJobs() {
+        return othersRepository.getJobs();
+    }
+
+    public List<AGE_CATEGORY> getAgeCat() {
+        return othersRepository.getAgeCat();
+    }
+
+    public List<PAYMENT_METHODS> getPayMet() {
+        return othersRepository.getPayMet();
+    }
+
+    public List<PAYMENTS> getPayment() {
+        return othersRepository.getPayment();
+    }
+
+//    Depozit
+    @Autowired
+    private DepozitRepository depozitRepository;
+
+    public List<CLIENTS_DW> getClientsDw() {
+        return depozitRepository.getClientsDw();
+    }
+
+    public List<PAYMENTS_DW> getPaymentsDw() {
+        return depozitRepository.getPaymentsDw();
+    }
+
+    public List<PROMOTIONS_DW> getPromoDw() {
+        return depozitRepository.getPromoDw();
+    }
+
+    public List<SALON_SERVICES_DW> getSalServDw() {
+        return depozitRepository.getSalServDw();
+    }
+
+    public List<SERVICES_VALUE_DW> getServValueDw() {
+        return depozitRepository.getServValueDw();
+    }
+
+    public List<STAFF_DW> getStaffDw() {
+        return depozitRepository.getStaffDw();
+    }
+
+    public List<STAFF_JOB_TITLE_DW> getJobsDw() {
+        return depozitRepository.getJobsDw();
+    }
+
+    public List<TIMP_DW> getTimpDw() {
+        return depozitRepository.getTimpDw();
+    }
 }

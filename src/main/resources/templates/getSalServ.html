@@ -2,42 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BS | Servicii Programari</title>
+    <title>BS | Servicii Salon</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+    <!--            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+    <!--            crossorigin="anonymous"></script>-->
+    <!--&lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"&ndash;&gt;-->
+    <!--&lt;!&ndash;            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"&ndash;&gt;-->
+    <!--&lt;!&ndash;            crossorigin="anonymous"></script>&ndash;&gt;-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <script>
-
-        function addNewServ() {
-            console.log("test");
-            var appIdInput = $("#appid").val();
-            var servInput = $("#serv").val();
-            var staffInput = $("#staff").val();
-
-            const dataServer = {
-                appointment_id: appIdInput,
-                salon_service_id: servInput,
-                staff_id: staffInput
-            }
-
-            console.log(dataServer);
-
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "http://localhost:9090/adaugaAppServ",
-                data: JSON.stringify(dataServer),
-                success: function (data) {
-                    console.log(data);
-                    window.location = "http://localhost:9090/main/getAppServ"
-                }
-            })
-        }
-    </script>
     <style>
 
         body {
@@ -165,15 +143,15 @@
                     <a class="nav-link" href="/main">Acasa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main/getStaff">Angajati</a>
+                    <a class="nav-link" href="/main/getStaff">Angajati <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main/getProgr">Programari <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/main/getProgr">Programari</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/main/getAppServ">Servicii Programari</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/main/getSalServ">Servicii Salon</a>
                 </li>
                 <li class="nav-item">
@@ -215,54 +193,125 @@
     </div>
 </nav>
 <div class="cover">
-    <h1 class="pageTitle">Servicii Programari</h1>
+    <h1 class="pageTitle">Servicii Salon</h1>
 </div>
 <div class="container">
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="col-sm-6">
-            <h4>Adauga un nou serviciu</h4>
+            <h4>Adauga un serviciu nou</h4>
             <div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="appid_text">ID Programare</span>
+                        <span class="input-group-text" id="nume_text">Nume Serviciu</span>
                     </div>
-                    <input type="text" placeholder="" id="appid">
+                    <input type="text" placeholder="" id="nume">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="serv_text">ID Serviciu</span>
+                        <span class="input-group-text" id="desc_text">Descriere Serviciu</span>
                     </div>
-                    <input type="text" placeholder="" id="serv">
+                    <input type="text" placeholder="" id="desc">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="staff_text">ID Staff</span>
+                        <span class="input-group-text" id="pret_text">Pret Standard</span>
                     </div>
-                    <input type="text" placeholder="" id="staff">
+                    <input type="text" placeholder="" id="pret">
                 </div>
-                <input type="button" class="btn btn-outline-primary" onclick="addNewServ()" value="Adauga Serviciu Programare">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="subc_text">Subcategorie Serviciu</span>
+                    </div>
+                    <input type="text" placeholder="" id="subc">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="promo_text">Promotie</span>
+                    </div>
+                    <input type="text" placeholder="" id="promo">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="jobid_text">ID Job</span>
+                    </div>
+                    <input type="text" placeholder="" id="jobid">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="extra_text">Extra Charge</span>
+                    </div>
+                    <input type="text" placeholder="" id="extra">
+                </div>
+                <input type="button" class="btn btn-outline-primary" onclick="addNewSalServ()" value="Adauga Serviciu Nou">
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <h4>Editeaza Serviciu</h4>
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="salsid_text">ID Serviciu</span>
+                    </div>
+                    <input type="text" placeholder="" id="salsid">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="nume2_text">Nume Serviciu</span>
+                    </div>
+                    <input type="text" placeholder="" id="nume_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="desc2_text">Descriere Serviciu</span>
+                    </div>
+                    <input type="text" placeholder="" id="desc_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="pret2_text">Pret Standard</span>
+                    </div>
+                    <input type="text" placeholder="" id="pret_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="subc2_text">Subcategorie Serviciu</span>
+                    </div>
+                    <input type="text" placeholder="" id="subc_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="promo2_text">Promotie</span>
+                    </div>
+                    <input type="text" placeholder="" id="promo_ed">
+                </div>
+
+                <input type="button" class="btn btn-outline-primary" onclick="editSalServ()"
+                       value="Salveaza Modificarile">
             </div>
         </div>
     </div>
-
     <div class="scrollTable">
         <table class="table myTable">
             <tr>
-                <th>ID Programare</th>
                 <th>ID Serviciu</th>
-                <th>ID Staff</th>
-                <th>Pret Serviciu</th>
-                <th>Sterge Serviciu Programare</th>
+                <th>Nume Serviciu</th>
+                <th>Descriere Serviciu</th>
+                <th>Pret Standard</th>
+                <th>Subcategorie Serviciu</th>
+                <th>Promotie</th>
             </tr>
-            <tr th:each="appServ: ${AppServices}">
-                <td th:text="${appServ.getAppointment_id()}"></td>
-                <td th:text="${appServ.getSalon_service_id()}"></td>
-                <td th:text="${appServ.getStaff_id()}"></td>
-                <td th:text="${appServ.getService_price()}"></td>
+            <tr th:each="sals: ${SalonServices}">
+                <td th:text="${sals.salon_service_id}"></td>
+                <td th:text="${sals.salon_service_name}"></td>
+                <td th:text="${sals.salon_service_description}"></td>
+                <td th:text="${sals.salon_standard_price}"></td>
+                <td th:text="${sals.salon_service_subcategory_id}"></td>
+                <td th:text="${sals.promotion_id}"></td>
                 <td>
-                    <a th:href="@{/stergeAppServ/{idApp}/{idServ}/{idStaff}(idApp=${appServ.getAppointment_id()}, idServ=${appServ.getSalon_service_id()}, idStaff=${appServ.getStaff_id()})}" class="btn btn-outline-primary">Sterge Serviciu Programare</a>
-<!--                    <a th:href="@{/stergeAppServ/{idApp}(idApp=${appServ.getAppointment_id()}){idServ}(idServ=${appServ.getSalon_service_id()}){idStaff}(idStaff=${appServ.getStaff_id()})}" class="btn btn-outline-primary">Sterge Serviciu Programare</a>-->
+                    <a th:href="@{/stergeSalServ/{idSalServ}(idSalServ=${sals.salon_service_id})}" class="btn btn-outline-primary">Sterge
+                        Serviciu</a>
                 </td>
             </tr>
         </table>
@@ -285,6 +334,69 @@
         <p>© 2021 Beauty Salon. All Rights Reserved.</p>
     </div>
 </div>
+<script>
+    function editSalServ() {
+        var salsidInput = $("#salsid").val();
+        var numeInput = $("#nume_ed").val();
+        var descInput = $("#desc_ed").val();
+        var pretInput = $("#pret_ed").val();
+        var subcInput = $("#subc_ed").val();
+        var promoInput = $("#promo_ed").val();
 
+        const dataServer = {
+            salon_service_name: numeInput,
+            salon_service_description: descInput,
+            salon_standard_price: pretInput,
+            salon_service_subcategory_id: subcInput,
+            promotion_id: promoInput
+        }
+
+        console.log(dataServer);
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:9090/updateSalServ?id=" + salsidInput,
+            data: JSON.stringify(dataServer),
+            success: function (data) {
+                console.log(data);
+                window.location = "http://localhost:9090/main/getSalServ"
+            }
+        })
+    }
+
+    function addNewSalServ() {
+        var numeInput = $("#nume").val();
+        var descInput = $("#desc").val();
+        var pretInput = $("#pret").val();
+        var subcInput = $("#subc").val();
+        var promoInput = $("#promo").val();
+
+        var jobidInput = $("#jobid").val();
+        var extraInput = $("#extra").val();
+
+
+        const dataServer = {
+            salon_service_name: numeInput,
+            salon_service_description: descInput,
+            salon_standard_price: pretInput,
+            salon_service_subcategory_id: subcInput,
+            promotion_id: promoInput
+        }
+
+        console.log(dataServer);
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "http://localhost:9090/adaugaSalServ?idJob=" + jobidInput + "&extra=" + extraInput,
+            data: JSON.stringify(dataServer),
+            success: function (data) {
+                console.log(data);
+                window.location = "http://localhost:9090/main/getSalServ"
+            }
+        })
+    }
+</script>
 </body>
 </html>

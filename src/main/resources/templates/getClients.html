@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BS | Programari</title>
+    <title>BS | Clienti</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -76,8 +76,7 @@
         }
 
         .scrollTable {
-            max-height: 700px;
-            height: 100%;
+            height: 700px;
             overflow-y: scroll;
             margin-bottom: 35px;
         }
@@ -144,10 +143,10 @@
                     <a class="nav-link" href="/main">Acasa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main/getStaff">Angajati</a>
+                    <a class="nav-link" href="/main/getStaff">Angajati <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/main/getProgr">Programari <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/main/getProgr">Programari</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/main/getAppServ">Servicii Programari</a>
@@ -155,7 +154,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main/getSalServ">Servicii Salon</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="/main/getClients">Clienti</a>
                 </li>
                 <li class="nav-item">
@@ -194,64 +193,112 @@
     </div>
 </nav>
 <div class="cover">
-    <h1 class="pageTitle">Programari</h1>
+    <h1 class="pageTitle">Clienti</h1>
 </div>
 <div class="container">
 
     <div class="row" style="margin-bottom: 30px;">
         <div class="col-sm-6">
-            <h4>Adauga o programare noua</h4>
+            <h4>Adauga un Client nou</h4>
             <div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="clientid_text">Client ID</span>
+                        <span class="input-group-text" id="idvarsta_text">ID Categorie Varsta</span>
                     </div>
-                    <input type="text" placeholder="" id="clientid">
+                    <input type="text" placeholder="" id="idvarsta">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="data_text">Data</span>
+                        <span class="input-group-text" id="nume_text">Nume</span>
                     </div>
-                    <input type="text" placeholder="" id="data">
+                    <input type="text" placeholder="" id="nume">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="ora_text">Ora</span>
+                        <span class="input-group-text" id="prenume_text">Prenume</span>
                     </div>
-                    <input type="text" placeholder="" id="ora">
+                    <input type="text" placeholder="" id="prenume">
                 </div>
-                <input type="button" class="btn btn-outline-primary" onclick="addNewProgr()" value="Adauga Programare">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="gen_text">Gen</span>
+                    </div>
+                    <input type="text" placeholder="" id="gen">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="adresa_text">Adresa</span>
+                    </div>
+                    <input type="text" placeholder="" id="adresa">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="tel_text">Telefon</span>
+                    </div>
+                    <input type="text" placeholder="" id="tel">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="email_text">Email</span>
+                    </div>
+                    <input type="text" placeholder="" id="email">
+                </div>
+                <input type="button" class="btn btn-outline-primary" onclick="addNewClient()" value="Adauga Client Nou">
             </div>
         </div>
 
         <div class="col-sm-6">
-            <h4>Editeaza Programare</h4>
+            <h4>Editeaza Client</h4>
             <div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="appid_text">Appointment ID</span>
-                    </div>
-                    <input type="text" placeholder="" id="appid_ed">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="clientid2_text">Client ID</span>
+                        <span class="input-group-text" id="clientid_text">ID Client</span>
                     </div>
                     <input type="text" placeholder="" id="clientid_ed">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="data2_text">Data</span>
+                        <span class="input-group-text" id="idvarsta2_text">ID Categorie Varsta</span>
                     </div>
-                    <input type="text" placeholder="" id="data_ed">
+                    <input type="text" placeholder="" id="idvarsta_ed">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="ora2_text">Ora</span>
+                        <span class="input-group-text" id="nume2_text">Nume</span>
                     </div>
-                    <input type="text" placeholder="" id="ora_ed">
+                    <input type="text" placeholder="" id="nume_ed">
                 </div>
-                <input type="button" class="btn btn-outline-primary" onclick="editProgr()"
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="prenume2_text">Prenume</span>
+                    </div>
+                    <input type="text" placeholder="" id="prenume_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="gen2_text">Gen</span>
+                    </div>
+                    <input type="text" placeholder="" id="gen_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="adresa2_text">Adresa</span>
+                    </div>
+                    <input type="text" placeholder="" id="adresa_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="tel2_text">Telefon</span>
+                    </div>
+                    <input type="text" placeholder="" id="tel_ed">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="email2_text">Email</span>
+                    </div>
+                    <input type="text" placeholder="" id="email_ed">
+                </div>
+                <input type="button" class="btn btn-outline-primary" onclick="editClient()"
                        value="Salveaza Modificarile">
             </div>
         </div>
@@ -259,20 +306,27 @@
     <div class="scrollTable">
         <table class="table myTable">
             <tr>
-                <th>ID Programare</th>
                 <th>ID Client</th>
-                <th>Data Programarii</th>
-                <th>Ora Programarii</th>
-                <th>Sterge Programare</th>
+                <th>ID Categorie Varsta</th>
+                <th>Nume</th>
+                <th>Prenume</th>
+                <th>Gen</th>
+                <th>Adresa</th>
+                <th>Telefon</th>
+                <th>Email</th>
             </tr>
-            <tr th:each="progr: ${Programari}">
-                <td th:text="${progr.getAppointment_id()}"></td>
-                <td th:text="${progr.getClient_id()}"></td>
-                <td th:text="${progr.getAppointment_date()}"></td>
-                <td th:text="${progr.getAppointment_time()}"></td>
+            <tr th:each="cli: ${Clients}">
+                <td th:text="${cli.client_id}"></td>
+                <td th:text="${cli.age_category_id}"></td>
+                <td th:text="${cli.client_first_name}"></td>
+                <td th:text="${cli.client_last_name}"></td>
+                <td th:text="${cli.client_gender}"></td>
+                <td th:text="${cli.client_address}"></td>
+                <td th:text="${cli.client_cell_phone}"></td>
+                <td th:text="${cli.client_email}"></td>
                 <td>
-                    <a th:href="@{/stergeProgr/{idProgr}(idProgr=${progr.getAppointment_id()})}" class="btn btn-outline-primary">Sterge
-                        Programare</a>
+                    <a th:href="@{/stergeClient/{idClient}(idClient=${cli.client_id})}" class="btn btn-outline-primary">Sterge
+                        Client</a>
                 </td>
             </tr>
         </table>
@@ -296,16 +350,25 @@
     </div>
 </div>
 <script>
-    function editProgr() {
-        var progrId = $("#appid_ed").val();
-        var clientIdInput = $("#clientid_ed").val();
-        var dataInput = $("#data_ed").val();
-        var oraInput = $("#ora_ed").val();
+    function editClient() {
+        var idclientInput = $("#clientid_ed").val();
+        var idvarstaInput = $("#idvarsta_ed").val();
+        var numeInput = $("#nume_ed").val();
+        var prenumeInput = $("#prenume_ed").val();
+        var genInput = $("#gen_ed").val();
+        var adresaInput = $("#adresa_ed").val();
+        var telInput = $("#tel_ed").val();
+        var emailInput = $("#email_ed").val();
 
         const dataServer = {
-            client_id: clientIdInput,
-            appointment_date: dataInput,
-            appointment_time: oraInput
+            client_id: idclientInput,
+            age_category_id: idvarstaInput,
+            client_first_name: numeInput,
+            client_last_name: prenumeInput,
+            client_gender: genInput,
+            client_address: adresaInput,
+            client_cell_phone: telInput,
+            client_email: emailInput
         }
 
         console.log(dataServer);
@@ -313,24 +376,32 @@
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:9090/updateProgr?id=" + progrId,
+            url: "http://localhost:9090/updateClient?id=" + idclientInput,
             data: JSON.stringify(dataServer),
             success: function (data) {
                 console.log(data);
-                window.location = "http://localhost:9090/main/getProgr"
+                window.location = "http://localhost:9090/main/getClients"
             }
         })
     }
 
-    function addNewProgr() {
-        var clientIdInput = $("#clientid").val();
-        var dataInput = $("#data").val();
-        var oraInput = $("#ora").val();
+    function addNewClient() {
+        var idvarstaInput = $("#idvarsta").val();
+        var numeInput = $("#nume").val();
+        var prenumeInput = $("#prenume").val();
+        var genInput = $("#gen").val();
+        var adresaInput = $("#adresa").val();
+        var telInput = $("#tel").val();
+        var emailInput = $("#email").val();
 
         const dataServer = {
-            client_id: clientIdInput,
-            appointment_date: dataInput,
-            appointment_time: oraInput
+            age_category_id: idvarstaInput,
+            client_first_name: numeInput,
+            client_last_name: prenumeInput,
+            client_gender: genInput,
+            client_address: adresaInput,
+            client_cell_phone: telInput,
+            client_email: emailInput
         }
 
         console.log(dataServer);
@@ -338,11 +409,11 @@
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:9090/adaugaProgr",
+            url: "http://localhost:9090/adaugaClient",
             data: JSON.stringify(dataServer),
             success: function (data) {
                 console.log(data);
-                window.location = "http://localhost:9090/main/getProgr"
+                window.location = "http://localhost:9090/main/getClients"
             }
         })
     }

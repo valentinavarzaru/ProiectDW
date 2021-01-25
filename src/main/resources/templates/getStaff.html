@@ -78,6 +78,7 @@
         .scrollTable {
             height: 700px;
             overflow-y: scroll;
+            margin-bottom: 35px;
         }
 
         footer {
@@ -151,26 +152,26 @@
                 <a class="nav-link" href="/main/getAppServ">Servicii Programari</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Servicii Salon</a>
+                <a class="nav-link" href="/main/getSalServ">Servicii Salon</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Clienti</a>
+                <a class="nav-link" href="/main/getClients">Clienti</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Plati</a>
+                <a class="nav-link" href="/main/getPayment">Plati</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Depozit
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Angajati</a>
-                    <a class="dropdown-item" href="#">Plati</a>
-                    <a class="dropdown-item" href="#">Tabela de fapte</a>
-                    <a class="dropdown-item" href="#">Servicii</a>
-                    <a class="dropdown-item" href="#">Promotii</a>
-                    <a class="dropdown-item" href="#">Clienti</a>
-                    <a class="dropdown-item" href="#">Timp</a>
+                    <a class="dropdown-item" href="/main/getStaffDw">Angajati</a>
+                    <a class="dropdown-item" href="/main/getPaymentsDw">Plati</a>
+                    <a class="dropdown-item" href="/main/getServValueDw">Tabela de fapte</a>
+                    <a class="dropdown-item" href="/main/getSalServDw">Servicii</a>
+                    <a class="dropdown-item" href="/main/getPromoDw">Promotii</a>
+                    <a class="dropdown-item" href="/main/getClientsDw">Clienti</a>
+                    <a class="dropdown-item" href="/main/getTimpDw">Timp</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -178,13 +179,13 @@
                     Altele
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Categorii</a>
-                    <a class="dropdown-item" href="#">Subcategorii</a>
-                    <a class="dropdown-item" href="#">Promotii</a>
-                    <a class="dropdown-item" href="#">Extra Charge</a>
-                    <a class="dropdown-item" href="#">Joburi</a>
-                    <a class="dropdown-item" href="#">Categorii de varsta</a>
-                    <a class="dropdown-item" href="#">Metode de plata</a>
+                    <a class="dropdown-item" href="/main/getCategories">Categorii</a>
+                    <a class="dropdown-item" href="/main/getSubcategories">Subcategorii</a>
+                    <a class="dropdown-item" href="/main/getPromo">Promotii</a>
+                    <a class="dropdown-item" href="/main/getExtraCharge">Extra Charge</a>
+                    <a class="dropdown-item" href="/main/getJobs">Joburi</a>
+                    <a class="dropdown-item" href="/main/getAgeCat">Categorii de varsta</a>
+                    <a class="dropdown-item" href="/main/getPayMet">Metode de plata</a>
                 </div>
             </li>
         </ul>
@@ -276,7 +277,6 @@
         </table>
     </div>
 
-    <a th:href="@{/main}">Inapoi</a>
 </div>
 
 
