@@ -22,8 +22,8 @@ public class AppServicesRepository {
     }
 
     public List<APPOINTMENT_SERVICES> adaugaServ(APPOINTMENT_SERVICES p) {
-        jdbcTemplate.update(Querys.ADAUGA_serv, p.getAppointment_id(), p.getSalon_service_id(), p.getStaff_id(), 0);
-        jdbcTemplate.update(Querys.Update_service_price, p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id(), p.getAppointment_id(), p.getStaff_id(), p.getSalon_service_id());
+        jdbcTemplate.update(Querys.ADAUGA_serv, p.getAppointment_id(), p.getSalon_service_id(), p.getStaff_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id());
+//        jdbcTemplate.update(Querys.Update_service_price, p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getSalon_service_id(), p.getStaff_id(), p.getAppointment_id(), p.getStaff_id(), p.getSalon_service_id());
         jdbcTemplate.update(Querys.UPDATE_PRETURI_PLATA, p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id());
         jdbcTemplate.update(Querys.ADAUGA_serv_dw, p.getAppointment_id(), p.getStaff_id(), p.getSalon_service_id(), p.getSalon_service_id());
         jdbcTemplate.update(Querys.UPDATE_PRETURI_PLATA, p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id(), p.getAppointment_id());

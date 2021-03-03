@@ -16,6 +16,13 @@ public class STAFF {
         this.base_salary = base_salary;
     }
 
+    public STAFF(int job_id, String staff_name, int base_salary) {
+        this.job_id = job_id;
+        this.staff_name = staff_name;
+        this.base_salary = base_salary;
+    }
+
+
     public int getStaff_id() {
         return staff_id;
     }

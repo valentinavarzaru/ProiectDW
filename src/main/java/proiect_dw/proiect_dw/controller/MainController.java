@@ -28,6 +28,12 @@ public class MainController {
         return "getStaff";
     }
 
+    @GetMapping("/main/getStaffById")
+    public String getStaffById(int id, Model model) {
+        model.addAttribute("staffMembers", mainService.getStaffById(id));
+        return "getStaffById";
+    }
+
     @PostMapping("/adaugaStaff")
     public String adaugaStaff(@RequestBody STAFF s, Model model) {
         mainService.adaugaStaff(s);

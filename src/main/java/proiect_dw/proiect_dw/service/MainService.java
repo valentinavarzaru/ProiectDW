@@ -19,6 +19,9 @@ public class MainService {
     public List<STAFF> getStaff() {
         return staffRepository.getStaff();
     }
+    public List<STAFF> getStaffById(int id) {
+        return staffRepository.getStaffById(id);
+    }
 
     public List<STAFF> adaugaStaff(STAFF s) {
         return staffRepository.adaugaStaff(s);

@@ -4,6 +4,8 @@ public class Querys {
     //Staff
     public final static String GET_STAFF_SQL = "select * from user_OLTP_dw.staff order by staff_id desc";
     public final static String ADAUGA_STAFF = "insert into user_OLTP_dw.staff(staff_id, job_id, staff_name, base_salary) values ((select max(staff_id) from user_OLTP_dw.staff ) + 1, ?, ?, ?)";
+    public final static String FIND_STAFF_BY_ID = "select * from user_OLTP_dw.staff where staff_id = ?";
+
     public final static String ADAUGA_STAFF_DW = "insert into user_depozit_dw.staff_dw(staff_id, job_id, job_title, staff_name, base_salary) values ((select max(staff_id) from user_depozit_dw.staff_dw) + 1, ?, (select job_name \n" +
             "from user_OLTP_dw.staff_job_title j\n" +
             "where j.job_id = ?) , ?, ?)";
@@ -66,7 +68,18 @@ public class Querys {
 
     //Appointment Services
     public final static String GET_serv_SQL = "select * from (select * from user_OLTP_dw.appointment_services order by appointment_id desc) where rownum<1001";
-    public final static String ADAUGA_serv = "insert into user_OLTP_dw.appointment_services(appointment_id, salon_service_id, staff_id, service_price) values (?, ?, ?, ?)";
+//    public final static String ADAUGA_serv = "insert into user_OLTP_dw.appointment_services(appointment_id, salon_service_id, staff_id, service_price) values (?, ?, ?, ?)";
+    public final static String ADAUGA_serv = "insert into user_OLTP_dw.appointment_services(appointment_id, salon_service_id, staff_id, service_price) values (?, ?, ?, (select salon_standard_price from user_OLTP_dw.SALON_SERVICES where salon_service_id = ?)\n" +
+        "+\n" +
+        "(select charge_amount from user_OLTP_dw.STAFF_EXTRA_CHARGE where salon_service_id = ? and job_id = (select job_id from user_OLTP_dw.STAFF st where st.staff_id = ?))\n" +
+        "- trunc(\n" +
+        "(select promotion_discount from user_OLTP_dw.PROMOTIONS a, user_OLTP_dw.salon_services b\n" +
+        "where a.promotion_id = b.promotion_id and b.salon_service_id = ?)\n" +
+        "*(\n" +
+        "(select salon_standard_price from user_OLTP_dw.SALON_SERVICES where salon_service_id = ?)\n" +
+        "+(select charge_amount from user_OLTP_dw.STAFF_EXTRA_CHARGE where salon_service_id = ?\n" +
+        "and job_id = (select job_id from user_OLTP_dw.STAFF st where st.staff_id = ?)))/100, 2)\n" +
+        ")";
     public final static String Update_service_price =
             "update user_OLTP_dw.appointment_services\n" +
                     "set service_price  = \n" +
@@ -84,7 +97,7 @@ public class Querys {
     public final static String ADAUGA_serv_dw = "insert into user_depozit_dw.services_value_dw \n" +
             "(select (select max(service_value_id) from user_depozit_dw.services_value_dw ) + 1,\n" +
             " a.client_id, s.salon_service_id, s.staff_id, st.job_id, a.appointment_date, payment_id, serv.promotion_id, a.appointment_id,\n" +
-            "age_discount, promotion_discount, (extra.charge_amount + serv.salon_standard_price), s.service_price\n" +
+            "age_discount, promotion_discount, (extra.charge_amount + serv.salon_standard_price), trunc(s.service_price - promotion_discount*s.service_price/100, 2)\n" +
             "from user_OLTP_dw.appointments a, user_OLTP_dw.appointment_services s, user_OLTP_dw.staff st, \n" +
             "user_OLTP_dw.payments p, user_OLTP_dw.salon_services serv, user_OLTP_dw.clients cli,\n" +
             "user_OLTP_dw.age_category age, user_OLTP_dw.promotions promo, user_OLTP_dw.staff_extra_charge extra\n" +

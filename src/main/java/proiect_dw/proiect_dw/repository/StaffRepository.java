@@ -9,6 +9,7 @@ import proiect_dw.proiect_dw.query.Querys;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class StaffRepository {
@@ -25,6 +26,10 @@ public class StaffRepository {
         jdbcTemplate.update(Querys.ADAUGA_STAFF, s.getJob_id(), s.getStaff_name(), s.getBase_salary());
         jdbcTemplate.update(Querys.ADAUGA_STAFF_DW, s.getJob_id(), s.getJob_id(), s.getStaff_name(), s.getBase_salary());
         return getStaff();
+    }
+
+    public List<STAFF> getStaffById(int id) {
+        return jdbcTemplate.query(Querys.FIND_STAFF_BY_ID,new BeanPropertyRowMapper<>(STAFF.class), id);
     }
 
     public List<STAFF> updateStaff(STAFF s, int id) {
